@@ -1,25 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+// src/App.js
+import React, { useState } from 'react';
+import CoinFlip from './components/CoinFlip';
+import WalletConnect from './components/WalletConnect';
+import './App.css'; // Ensure the CSS file is imported
 
-function App() {
+const App = () => {
+  const [signer, setSigner] = useState(null);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="wallet-section">
+        <WalletConnect setSigner={setSigner} />
+      </div>
+      <div className="game-section">
+        {signer ? (
+          <CoinFlip signer={signer} />
+        ) : (
+          <p className="info-text">Please connect your wallet to start playing the game.</p>
+        )}
+      </div>
     </div>
   );
-}
+};
 
 export default App;
